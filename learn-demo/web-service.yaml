@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-08-08T17:32:26Z"
+  labels:
+    app: web
+  name: web
+  namespace: learn-demo
+  resourceVersion: "328930"
+  uid: 17af6af1-c817-47d5-93bd-b821072ade71
+spec:
+  clusterIP: 10.111.58.65
+  clusterIPs:
+  - 10.111.58.65
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 32093
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: web
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

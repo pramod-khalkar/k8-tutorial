@@ -42,8 +42,8 @@
 
 # Direct deployment commands of mongo and nginx
 
-`kubectl create deployment nginx-depl --image=nginx`
-`kubectl create deployment mongo-depl --image=mongo`
+- `kubectl create deployment nginx-depl --image=nginx`
+- `kubectl create deployment mongo-depl --image=mongo`
 
 # Namespaces
 
@@ -64,10 +64,10 @@
 
 - If you want to avoid every time passing `-n <ns>` then use `kubens <ns_name` and `kubens` to see active ns. to install `brew install kubectx`
 
-##### How to troubleshoot
-
-[Troubleshoot guide](./troubleshoot.md)
-
 ##### Check mongo application
 
 [Mongo application](./mongo/README.md)
+
+##### How to troubleshoot
+
+[Troubleshoot guide](./troubleshoot.md)

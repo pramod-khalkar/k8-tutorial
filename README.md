@@ -40,7 +40,7 @@
 | `kubectl api-resources --namespaced=true`                                                 | get the resources those are in namespace           |
 | `kubectl delete validatingwebhookconfigurations`                                          | to get validating webhooks                         |
 
-# Direct deployment commands
+# Direct deployment commands of mongo and nginx
 
 `kubectl create deployment nginx-depl --image=nginx`
 `kubectl create deployment mongo-depl --image=mongo`
@@ -54,42 +54,20 @@
 | kube-public     | public available info, config map with cluster info which we get by `kubectl cluster-info`                            |
 | kube-system     | contains system, master, kubctl process (DO NOT MODIFY)                                                               |
 
-#### configMap and secretConfig limited to indiviual namespace cant share
+- configMap and secretConfig limited to indiviual namespace cant share
 
-#### services can be shared across namespaces
+- services can be shared across namespaces
 
-#### Vol & node are at cluster level cant be created in namespaces
+- Vol & node are at cluster level cant be created in namespaces
 
-#### If you dont pass namespace it will create in default namespace
+- If you dont pass namespace it will create in default namespace
 
-#### If you want to avoid every time passing `-n <ns>` then use `kubens <ns_name` and `kubens` to see active ns. to install `brew install kubectx`
+- If you want to avoid every time passing `-n <ns>` then use `kubens <ns_name` and `kubens` to see active ns. to install `brew install kubectx`
 
-# Ingress
+##### How to troubleshoot
 
-`minikube addons enable ingress` - to start k8s ingress controller
-`kubectl get pods -n ingress-nginx` - to get the ingress controller pods. Note. check namespace if could not get it.
-`kubectl get ingress` with this you able to see IP address
-`vi /etc/hosts` add IP and DNS name
+[Troubleshoot guide](./troubleshoot.md)
 
-##### For below kind of error use `kubectl delete validatingwebhookconfigurations ingress-nginx-admission` command
+##### Check mongo application
 
-```txt
-rror from server (InternalError): error when creating "ingress.yaml": Internal error occurred:
-failed calling webhook "validate.nginx.ingress.kubernetes.io": failed to call webhook:
-Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1/ingresses?timeout=10s":
-service "ingress-nginx-controller-admission" not found
-
-```
-
-# Example to access db from browser with mongodb and mongodb express pod running
-
-| No. | Steps                                           | What to do?                                                                           |
-| --- | ----------------------------------------------- | ------------------------------------------------------------------------------------- |
-| 1   | create deployement and service file for mongodb |                                                                                       |
-| 2   | create secret file to store credentials         | `echo -n 'username' \| base64` to encode the key and `kubectl apply -f <secret_file>` |
-| 3   | create configMap file to properties             | 'kubectl apply -f <config_file_name>'                                                 |
-| 4   | create mongo express deployment and service     | 'kubectl apply -f <file_name>'                                                        |
-| 5   | start load balancer service                     | 'minikube service <service_name>' here it will be mongo express service               |
-
-> [!IMPORTANT]
-> it will show external ip as <pending> in case of minikube only
+[Mongo application](./mongo/README.md)

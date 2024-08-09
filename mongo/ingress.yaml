@@ -7,11 +7,11 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: app.com
+    - host: app.com.example
       http:
         paths:
           - path: /
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: mongo-express-service
